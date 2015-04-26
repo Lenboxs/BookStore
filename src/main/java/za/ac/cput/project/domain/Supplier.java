@@ -2,6 +2,8 @@ package za.ac.cput.project.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by student on 2015/04/17.
@@ -14,7 +16,11 @@ public class Supplier implements Serializable{
     private String supplierName;
     private Long supplierContactDetails;
     private String supplierEmail;
-    private String supplieraddress;
+    private String supplierAddress;
+    @OneToMany
+    @JoinColumn(name="supplierId")
+    private List<SupplierInvoice> supplierInvoice = new ArrayList<SupplierInvoice>();
+
 
     private Supplier(){}
 
@@ -24,7 +30,8 @@ public class Supplier implements Serializable{
         supplierName=builder.supplierName;
         supplierContactDetails=builder.supplierContactDetails;
         supplierEmail=builder.supplierEmail;
-        supplieraddress=builder.supplieraddress;
+        supplierAddress=builder.supplierAddress;
+        supplierInvoice=builder.supplierInvoice;
 
     }
 
@@ -44,9 +51,14 @@ public class Supplier implements Serializable{
         return supplierEmail;
     }
 
-    public String getSupplieraddress() {
-        return supplieraddress;
+    public String getSupplierAddress() {
+        return supplierAddress;
     }
+
+    public List<SupplierInvoice> getSupplierInvoice() {
+        return supplierInvoice;
+    }
+
 
     public static class Builder{
 
@@ -54,11 +66,11 @@ public class Supplier implements Serializable{
         private String supplierName;
         private long supplierContactDetails;
         private String supplierEmail;
-        private String supplieraddress;
+        private String supplierAddress;
+        private List<SupplierInvoice> supplierInvoice = new ArrayList<SupplierInvoice>();
 
-        public Builder supplierId(Long value){
+        public Builder(Long value){
             this.supplierId=value;
-            return this;
         }
         public Builder supplierName(String value){
             this.supplierName=value;
@@ -72,8 +84,22 @@ public class Supplier implements Serializable{
             this.supplierEmail=value;
             return this;
         }
-        public Builder supplieraddress(String value){
-            this.supplieraddress=value;
+        public Builder supplierAddress(String value){
+            this.supplierAddress=value;
+            return this;
+        }
+        public Builder supplierInvoice(List<SupplierInvoice> value){
+            this.supplierInvoice=value;
+            return this;
+        }
+
+        public Builder copy(Supplier value){
+            this.supplierId=value.getSupplierId();
+            this.supplierName=value.getSupplierName();
+            this.supplierContactDetails=value.getSupplierContactDetails();
+            this.supplierEmail=value.getSupplierEmail();
+            this.supplierAddress=value.getSupplierAddress();
+            this.supplierInvoice=value.getSupplierInvoice();
             return this;
         }
 
@@ -84,22 +110,47 @@ public class Supplier implements Serializable{
     }
 
     @Override
-    public int hashCode() {
-        return supplierId != null ? supplierId.hashCode() : 0;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Supplier)) return false;
 
         Supplier supplier = (Supplier) o;
 
-        return !(supplierId != null ? !supplierId.equals(supplier.supplierId) : supplier.supplierId != null);
+        if (supplierAddress != null ? !supplierAddress.equals(supplier.supplierAddress) : supplier.supplierAddress != null)
+            return false;
+        if (supplierContactDetails != null ? !supplierContactDetails.equals(supplier.supplierContactDetails) : supplier.supplierContactDetails != null)
+            return false;
+        if (supplierEmail != null ? !supplierEmail.equals(supplier.supplierEmail) : supplier.supplierEmail != null)
+            return false;
+        if (supplierId != null ? !supplierId.equals(supplier.supplierId) : supplier.supplierId != null) return false;
+        if (supplierInvoice != null ? !supplierInvoice.equals(supplier.supplierInvoice) : supplier.supplierInvoice != null)
+            return false;
+        if (supplierName != null ? !supplierName.equals(supplier.supplierName) : supplier.supplierName != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = supplierId != null ? supplierId.hashCode() : 0;
+        result = 31 * result + (supplierName != null ? supplierName.hashCode() : 0);
+        result = 31 * result + (supplierContactDetails != null ? supplierContactDetails.hashCode() : 0);
+        result = 31 * result + (supplierEmail != null ? supplierEmail.hashCode() : 0);
+        result = 31 * result + (supplierAddress != null ? supplierAddress.hashCode() : 0);
+        result = 31 * result + (supplierInvoice != null ? supplierInvoice.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Supplier{" +
+                "supplierId=" + supplierId +
+                ", supplierName='" + supplierName + '\'' +
+                ", supplierContactDetails=" + supplierContactDetails +
+                ", supplierEmail='" + supplierEmail + '\'' +
+                ", supplierAddress='" + supplierAddress + '\'' +
+                ", supplierInvoice=" + supplierInvoice +
+                '}';
     }
 }

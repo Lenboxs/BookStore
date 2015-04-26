@@ -1,11 +1,13 @@
 package za.ac.cput.project.domain;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by student on 2015/04/17.
  */
+@Embeddable
 public class Demographic implements Serializable {
 
     private String rase;

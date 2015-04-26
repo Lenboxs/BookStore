@@ -1,0 +1,50 @@
+package za.ac.cput.project.domain;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import za.ac.cput.project.config.factory.TransactionFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+/**
+ * Created by student on 2015/04/26.
+ */
+public class TransactionTest {
+
+    @Before
+    public void setUp() throws Exception {
+
+
+    }
+
+    @Test
+    public void testCreateTransactionTest() throws Exception {
+        List<TransactionLine> transactionLine = new ArrayList<TransactionLine>();
+        Date date = new Date();
+        Transaction transaction = TransactionFactory.createTransaction("123tr",date,transactionLine);
+
+        Assert.assertEquals("123tr",transaction.getTransactionCode());
+    }
+
+    @Test
+    public void testUpdateTransactionTest() throws Exception {
+        List<TransactionLine> transactionLine = new ArrayList<TransactionLine>();
+        Date date = new Date(2015,04,06);
+        Transaction transaction = TransactionFactory.createTransaction("123tr",date,transactionLine);
+
+        Assert.assertEquals("123tr",transaction.getTransactionCode());
+
+        Transaction newtransaction = new Transaction
+                .Builder(transaction.getTransactionCode())
+                .copy(transaction)
+                .transactionDate(new Date(2015, 10, 10))
+                .build();
+
+        Assert.assertEquals("123tr",newtransaction.getTransactionCode());
+        Assert.assertEquals(new Date(2015, 10, 10),newtransaction.getTransactionDate());
+        Assert.assertEquals(new Date(2015,04,06),transaction.getTransactionDate());
+
+    }
+}

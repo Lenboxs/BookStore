@@ -1,10 +1,12 @@
 package za.ac.cput.project.domain;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Created by student on 2015/04/17.
  */
+@Embeddable
 public class Name implements Serializable {
 
     private String employeeName;
