@@ -14,7 +14,7 @@ import java.util.List;
 public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String transactionCode;
+    private Long transactionCode;
     private Date transactionDate;
     @OneToMany
     @JoinColumn(name="transactionCode")
@@ -29,7 +29,7 @@ public class Transaction implements Serializable {
         transactionLine=builder.transactionLine;
     }
 
-    public String getTransactionCode() {
+    public Long getTransactionCode() {
         return transactionCode;
     }
 
@@ -43,11 +43,11 @@ public class Transaction implements Serializable {
 
     public static class Builder{
 
-        private String transactionCode;
+        private Long transactionCode;
         private Date transactionDate;
         private List<TransactionLine> transactionLine = new ArrayList<TransactionLine>();
 
-        public Builder(String transactionCode){
+        public Builder(Long transactionCode){
             this.transactionCode=transactionCode;
         }
 
@@ -81,8 +81,7 @@ public class Transaction implements Serializable {
 
         Transaction that = (Transaction) o;
 
-        if (transactionCode != null ? !transactionCode.equals(that.transactionCode) : that.transactionCode != null)
-            return false;
+        if (transactionCode != that.transactionCode) return false;
         if (transactionDate != null ? !transactionDate.equals(that.transactionDate) : that.transactionDate != null)
             return false;
         if (transactionLine != null ? !transactionLine.equals(that.transactionLine) : that.transactionLine != null)
@@ -93,7 +92,7 @@ public class Transaction implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = transactionCode != null ? transactionCode.hashCode() : 0;
+        int result = (int) (transactionCode ^ (transactionCode >>> 32));
         result = 31 * result + (transactionDate != null ? transactionDate.hashCode() : 0);
         result = 31 * result + (transactionLine != null ? transactionLine.hashCode() : 0);
         return result;

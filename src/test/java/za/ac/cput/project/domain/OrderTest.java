@@ -23,7 +23,7 @@ public class OrderTest {
     @Test
     public void testCreateOrder() throws Exception {
         List<OrderLine> orderLine = new ArrayList<OrderLine>();
-        Date date = new Date(2015,02,02);
+        Date date = new Date(2015,2,2);
 
         Order order = OrderFactory.createOrder(12345L,date,100.00,orderLine);
 
@@ -35,7 +35,7 @@ public class OrderTest {
     public void testUpdateOrder() throws Exception {
 
         List<OrderLine> orderLine = new ArrayList<OrderLine>();
-        Date date = new Date(2015,02,02);
+        Date date = new Date(2015,2,2);
 
         Order order = OrderFactory.createOrder(12345L,date,100.00,orderLine);
 

@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SupplierInvoice implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String supplierInvoiceId;
+    private Long supplierInvoiceId;
     private int quantity;
 
     private SupplierInvoice(Builder builder){
@@ -19,7 +19,7 @@ public class SupplierInvoice implements Serializable {
         quantity=builder.quantity;
     }
 
-    public String getSupplierInvoiceId() {
+    public Long getSupplierInvoiceId() {
         return supplierInvoiceId;
     }
 
@@ -28,10 +28,10 @@ public class SupplierInvoice implements Serializable {
     }
 
     public static class Builder{
-        private String supplierInvoiceId;
+        private long supplierInvoiceId;
         private int quantity;
 
-        public Builder(String supplierInvoiceId){
+        public Builder(Long supplierInvoiceId){
             this.supplierInvoiceId=supplierInvoiceId;
         }
 
@@ -58,15 +58,14 @@ public class SupplierInvoice implements Serializable {
         SupplierInvoice that = (SupplierInvoice) o;
 
         if (quantity != that.quantity) return false;
-        if (supplierInvoiceId != null ? !supplierInvoiceId.equals(that.supplierInvoiceId) : that.supplierInvoiceId != null)
-            return false;
+        if (supplierInvoiceId != that.supplierInvoiceId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = supplierInvoiceId != null ? supplierInvoiceId.hashCode() : 0;
+        int result = (int) (supplierInvoiceId ^ (supplierInvoiceId >>> 32));
         result = 31 * result + quantity;
         return result;
     }

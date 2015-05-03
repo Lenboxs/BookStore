@@ -7,7 +7,7 @@ import za.ac.cput.project.domain.TransactionLine;
  */
 public class TransactionLineFactory {
 
-    public static TransactionLine createTransactionLine(String transactionLineCode,
+    public static TransactionLine createTransactionLine(long transactionLineCode,
                                                         double transactionLinePrice,
                                                         int transactionLineQuantitySold) {
 

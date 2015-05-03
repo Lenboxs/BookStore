@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class TransactionLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String transactionLineCode;
+    private Long transactionLineCode;
     private double transactionLinePrice;
     private int transactionLineQuantitySold;
 
@@ -22,7 +22,7 @@ public class TransactionLine implements Serializable {
         transactionLineQuantitySold=builder.transactionLineQuantitySold;
     }
 
-    public String getTransactionLineCode() {
+    public Long getTransactionLineCode() {
         return transactionLineCode;
     }
 
@@ -36,11 +36,11 @@ public class TransactionLine implements Serializable {
 
     public static class Builder{
 
-        private String transactionLineCode;
+        private Long transactionLineCode;
         private double transactionLinePrice;
         private int transactionLineQuantitySold;
 
-        public Builder(String transactionLineCode){
+        public Builder(Long transactionLineCode){
             this.transactionLineCode=transactionLineCode;
         }
 
@@ -72,10 +72,9 @@ public class TransactionLine implements Serializable {
 
         TransactionLine that = (TransactionLine) o;
 
+        if (transactionLineCode != that.transactionLineCode) return false;
         if (Double.compare(that.transactionLinePrice, transactionLinePrice) != 0) return false;
         if (transactionLineQuantitySold != that.transactionLineQuantitySold) return false;
-        if (transactionLineCode != null ? !transactionLineCode.equals(that.transactionLineCode) : that.transactionLineCode != null)
-            return false;
 
         return true;
     }
@@ -84,7 +83,7 @@ public class TransactionLine implements Serializable {
     public int hashCode() {
         int result;
         long temp;
-        result = transactionLineCode != null ? transactionLineCode.hashCode() : 0;
+        result = (int) (transactionLineCode ^ (transactionLineCode >>> 32));
         temp = Double.doubleToLongBits(transactionLinePrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + transactionLineQuantitySold;

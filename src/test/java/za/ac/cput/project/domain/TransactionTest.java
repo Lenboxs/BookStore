@@ -23,18 +23,18 @@ public class TransactionTest {
     public void testCreateTransactionTest() throws Exception {
         List<TransactionLine> transactionLine = new ArrayList<TransactionLine>();
         Date date = new Date();
-        Transaction transaction = TransactionFactory.createTransaction("123tr",date,transactionLine);
+        Transaction transaction = TransactionFactory.createTransaction(123l,date,transactionLine);
 
-        Assert.assertEquals("123tr",transaction.getTransactionCode());
+        Assert.assertEquals(new Long(123),transaction.getTransactionCode());
     }
 
     @Test
     public void testUpdateTransactionTest() throws Exception {
         List<TransactionLine> transactionLine = new ArrayList<TransactionLine>();
         Date date = new Date(2015,04,06);
-        Transaction transaction = TransactionFactory.createTransaction("123tr",date,transactionLine);
+        Transaction transaction = TransactionFactory.createTransaction(123l,date,transactionLine);
 
-        Assert.assertEquals("123tr",transaction.getTransactionCode());
+        Assert.assertEquals(new Long(123),transaction.getTransactionCode());
 
         Transaction newtransaction = new Transaction
                 .Builder(transaction.getTransactionCode())
@@ -42,7 +42,7 @@ public class TransactionTest {
                 .transactionDate(new Date(2015, 10, 10))
                 .build();
 
-        Assert.assertEquals("123tr",newtransaction.getTransactionCode());
+        Assert.assertEquals(new Long(123),newtransaction.getTransactionCode());
         Assert.assertEquals(new Date(2015, 10, 10),newtransaction.getTransactionDate());
         Assert.assertEquals(new Date(2015,04,06),transaction.getTransactionDate());
 

@@ -18,24 +18,24 @@ public class TransactionLineTest {
 
     @Test
     public void testCreateTransactionLine() throws Exception {
-        TransactionLine transactionLine = TransactionLineFactory.createTransactionLine("123tra",100.00,10);
+        TransactionLine transactionLine = TransactionLineFactory.createTransactionLine(123l,100.00,10);
 
-        Assert.assertEquals("123tra", transactionLine.getTransactionLineCode());
+        Assert.assertEquals(new Long(123), transactionLine.getTransactionLineCode());
 
     }
 
     @Test
     public void testUpdateTransactionLine() throws Exception {
-        TransactionLine transactionLine = TransactionLineFactory.createTransactionLine("123tra",100.00,10);
+        TransactionLine transactionLine = TransactionLineFactory.createTransactionLine(123l,100.00,10);
 
-        Assert.assertEquals("123tra", transactionLine.getTransactionLineCode());
+        Assert.assertEquals(new Long(123), transactionLine.getTransactionLineCode());
 
         TransactionLine newTransactionLine = new TransactionLine
                 .Builder(transactionLine.getTransactionLineCode())
                 .copy(transactionLine)
                 .transactionLineQuantitySold(6).build();
 
-        Assert.assertEquals("123tra",newTransactionLine.getTransactionLineCode());
+        Assert.assertEquals(new Long(123),newTransactionLine.getTransactionLineCode());
         Assert.assertEquals(6,newTransactionLine.getTransactionLineQuantitySold());
         Assert.assertEquals(10,transactionLine.getTransactionLineQuantitySold());
     }

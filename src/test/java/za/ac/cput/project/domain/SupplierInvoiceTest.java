@@ -19,9 +19,9 @@ public class SupplierInvoiceTest {
 
     @Test
     public void testCreateSupplierInvoice() throws Exception {
-        SupplierInvoice supplierInvoice =SupplierInvoiceFactory.createSupplierInvoice("abcdefg",2);
+        SupplierInvoice supplierInvoice =SupplierInvoiceFactory.createSupplierInvoice(1231239l,2);
 
-        Assert.assertEquals("abcdefg",supplierInvoice.getSupplierInvoiceId() );
+        Assert.assertEquals(new Long(1231239),supplierInvoice.getSupplierInvoiceId() );
 
 
 
@@ -30,9 +30,9 @@ public class SupplierInvoiceTest {
     @Test
     public void testUpdateSupplierInvoice() throws Exception {
 
-        SupplierInvoice supplierInvoice =SupplierInvoiceFactory.createSupplierInvoice("abcdefg",2);
+        SupplierInvoice supplierInvoice =SupplierInvoiceFactory.createSupplierInvoice(1231239l,2);
 
-        Assert.assertEquals("abcdefg",supplierInvoice.getSupplierInvoiceId() );
+        Assert.assertEquals(new Long(1231239),supplierInvoice.getSupplierInvoiceId() );
 
         SupplierInvoice newSupplierInvoice = new SupplierInvoice
                 .Builder(supplierInvoice.getSupplierInvoiceId())
@@ -40,7 +40,7 @@ public class SupplierInvoiceTest {
                 .quantity(5)
                 .build();
 
-        Assert.assertEquals("abcdefg",newSupplierInvoice.getSupplierInvoiceId());
+        Assert.assertEquals(new Long(1231239),newSupplierInvoice.getSupplierInvoiceId());
         Assert.assertEquals(5,newSupplierInvoice.getQuantity());
         Assert.assertEquals(2,supplierInvoice.getQuantity());
 

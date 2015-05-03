@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TransactionFactory {
 
-    public static Transaction createTransaction(String transactionCode,
+    public static Transaction createTransaction(long transactionCode,
                                                 Date transactionDate,
                                                 List<TransactionLine> transactionLine){
 

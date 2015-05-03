@@ -7,7 +7,7 @@ import za.ac.cput.project.domain.SupplierInvoice;
  */
 public class SupplierInvoiceFactory {
 
-    public static SupplierInvoice createSupplierInvoice(String supplierInvoiceId,
+    public static SupplierInvoice createSupplierInvoice(long supplierInvoiceId,
                                                         int quantity){
 
         SupplierInvoice supplierInvoice = new SupplierInvoice
