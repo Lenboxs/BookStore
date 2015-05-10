@@ -81,13 +81,7 @@ public class TransactionLine implements Serializable {
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (transactionLineCode ^ (transactionLineCode >>> 32));
-        temp = Double.doubleToLongBits(transactionLinePrice);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + transactionLineQuantitySold;
-        return result;
+        return transactionLineCode != null ? transactionLineCode.hashCode() : 0;
     }
 
     @Override

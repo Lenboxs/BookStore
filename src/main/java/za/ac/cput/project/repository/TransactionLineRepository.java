@@ -7,5 +7,5 @@ import za.ac.cput.project.domain.TransactionLine;
  * Created by student on 2015/05/01.
  */
 public interface TransactionLineRepository extends CrudRepository<TransactionLine,Long> {
-    public TransactionLine findByCode(String code);
+   // public TransactionLine findByCode(String code);
 }

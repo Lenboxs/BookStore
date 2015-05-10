@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - bookstore@localhost" uuid="d8ad7fa3-61dc-4784-bc86-45c4dbe13df7">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  <data-source name="bookstoreA - bookstoreA@localhost" uuid="ab42c098-64cd-429a-bea4-240130fde762">
+    <database-info product="MySQL" version="5.6.19-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="bookstoreA"/>
+    <table name="book" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="book_code" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="book_auther" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="book_publisher" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="book_quantity" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="book_code"/>
+      <exported-key name="FK_jbjagjwbcue8819t797453uy" table="order_line" schema="" catalog="bookstoreA" columns="book_code"/>
+      <exported-key name="FK_9622a4bbdyfyex17u187yew66" table="supplier_invoice" schema="" catalog="bookstoreA" columns="book_code"/>
+      <exported-key name="FK_k70eox629iv1ljusly1ul4djv" table="transaction_line" schema="" catalog="bookstoreA" columns="book_code"/>
+    </table>
+    <table name="client" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="client_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="client_contact_number" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="client_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="client_surname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="client_id"/>
+    </table>
+    <table name="employee" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="employee_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="employee_address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="employee_cell_number" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="employee_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date_of_birth" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="gender" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rase" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="employee_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="employee_surname" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="employee_id"/>
+      <exported-key name="FK_ki2mws1bq5u6mvgok2p95bkdh" table="transaction" schema="" catalog="bookstoreA" columns="employee_id"/>
+    </table>
+    <table name="order_line" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="order_line_number" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="quantity_bought" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="unit_price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="order_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="book_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="order_line_number"/>
+      <foreign-key name="FK_jbjagjwbcue8819t797453uy" columns="book_code" ref-table="book" ref-schema="" ref-catalog="bookstoreA" ref-columns="book_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_jbjagjwbcue8819t797453uy" unique="false" columns="book_code"/>
+    </table>
+    <table name="supplier" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="supplier_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="supplier_address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="supplier_contact_details" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="supplier_email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="supplier_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="supplier_id"/>
+      <exported-key name="FK_g7olprhlsofb7ivwb4csjpw4t" table="supplier_invoice" schema="" catalog="bookstoreA" columns="supplier_id"/>
+    </table>
+    <table name="supplier_invoice" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="supplier_invoice_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="quantity" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="supplier_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="book_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="supplier_invoice_id"/>
+      <foreign-key name="FK_9622a4bbdyfyex17u187yew66" columns="book_code" ref-table="book" ref-schema="" ref-catalog="bookstoreA" ref-columns="book_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_g7olprhlsofb7ivwb4csjpw4t" columns="supplier_id" ref-table="supplier" ref-schema="" ref-catalog="bookstoreA" ref-columns="supplier_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_9622a4bbdyfyex17u187yew66" unique="false" columns="book_code"/>
+      <index name="FK_g7olprhlsofb7ivwb4csjpw4t" unique="false" columns="supplier_id"/>
+    </table>
+    <table name="transaction" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="transaction_code" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="transaction_date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="employee_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="transaction_code"/>
+      <foreign-key name="FK_ki2mws1bq5u6mvgok2p95bkdh" columns="employee_id" ref-table="employee" ref-schema="" ref-catalog="bookstoreA" ref-columns="employee_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_k6tevrkl8w96d9gtx3qpvkk0f" table="transaction_line" schema="" catalog="bookstoreA" columns="transaction_code"/>
+      <index name="FK_ki2mws1bq5u6mvgok2p95bkdh" unique="false" columns="employee_id"/>
+    </table>
+    <table name="transaction_line" schema="" catalog="bookstoreA" type="TABLE">
+      <column name="transaction_line_code" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="transaction_line_price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="transaction_line_quantity_sold" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="transaction_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="book_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="transaction_line_code"/>
+      <foreign-key name="FK_k70eox629iv1ljusly1ul4djv" columns="book_code" ref-table="book" ref-schema="" ref-catalog="bookstoreA" ref-columns="book_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_k6tevrkl8w96d9gtx3qpvkk0f" columns="transaction_code" ref-table="transaction" ref-schema="" ref-catalog="bookstoreA" ref-columns="transaction_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_k6tevrkl8w96d9gtx3qpvkk0f" unique="false" columns="transaction_code"/>
+      <index name="FK_k70eox629iv1ljusly1ul4djv" unique="false" columns="book_code"/>
+    </table>
   </data-source>
 </component>

@@ -1,11 +1,10 @@
 package za.ac.cput.project.repository;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import za.ac.cput.project.App;
 import za.ac.cput.project.domain.Book;
@@ -19,16 +18,15 @@ import java.util.List;
 /**
  * Created by student on 2015/05/01.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = App.class)
+@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
-public class TestCrudBook {
-    private Long id;
+public class TestCrudBook extends AbstractTestNGSpringContextTests {
+    private Long id = null;
 
     @Autowired
-    BookRepository repository;
+    private BookRepository repository;
     @Test
-    public void testCreate() throws Exception {
+    public void Create() throws Exception {
 
         List<OrderLine> orderLines = new ArrayList<OrderLine>();
         List<TransactionLine> transactionLines = new ArrayList<TransactionLine>();
@@ -36,7 +34,7 @@ public class TestCrudBook {
         List<Book> books = new ArrayList<Book>();
         Book book = new Book.
                 Builder(id)
-                .bookName("the one").
+                .bookName("the three").
                 bookAuther("lennybot").
                 bookPublisher("the Botha").
                 bookPrice(100.00).
@@ -48,18 +46,20 @@ public class TestCrudBook {
         repository.save(book);
         id=book.getBookCode();
         Assert.assertNotNull(book.getBookCode());
+
+
     }
 
-    @Test
-    public void testRead() throws Exception {
+    @Test(dependsOnMethods = "Create")
+    public void Read() throws Exception {
 
         Book book = repository.findOne(id);
-        Assert.assertEquals("the one", book.getBookName());
+        Assert.assertEquals("the three", book.getBookName());
 
     }
 
-    @Test
-    public void testUpdate() throws Exception {
+    @Test(dependsOnMethods = "Read")
+    public void Update() throws Exception {
 
         List<OrderLine> orderLines = new ArrayList<OrderLine>();
         List<TransactionLine> transactionLines = new ArrayList<TransactionLine>();
@@ -67,7 +67,7 @@ public class TestCrudBook {
         Book book = repository.findOne(id);
         Book newBook = new Book.
                 Builder(id).
-                bookName("the Two").
+                bookName("the jimmy two").
                 bookAuther("lenny").
                 bookPublisher("barnardo").
                 bookPrice(150.00).
@@ -77,13 +77,13 @@ public class TestCrudBook {
                 supplierInvoice(supplierInvoices).
                 build();
         repository.save(newBook);
-        Assert.assertEquals("the Two", book.getBookName());
-        Assert.assertEquals("lenny", book.getBookAuther());
+        Assert.assertEquals("the three", book.getBookName());
+        Assert.assertEquals("lennybot", book.getBookAuther());
 
     }
 
-    @Test
-    public void testDelete() throws Exception {
+    @Test(dependsOnMethods = "Update")
+    public void Delete() throws Exception {
 
         Book book = repository.findOne(id);
         repository.delete(book);
