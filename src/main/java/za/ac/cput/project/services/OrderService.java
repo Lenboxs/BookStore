@@ -1,6 +1,7 @@
 package za.ac.cput.project.services;
 
 import za.ac.cput.project.domain.Order;
+import za.ac.cput.project.domain.OrderLine;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface OrderService {
     List<Order> getOrders();
+    List<OrderLine> getOrderLine(Long id);
 }

@@ -17,7 +17,7 @@ public class SupplierInvoiceServiceImpl {
 
     @Autowired
     SupplierInvoiceRepository repository;
-    public List<SupplierInvoice> getSuppliers() {
+    public List<SupplierInvoice> getSupplierInvoice() {
         List<SupplierInvoice> allSupplierInvoices = new ArrayList<SupplierInvoice>();
 
         Iterable<SupplierInvoice> supplierInvoices = repository.findAll();

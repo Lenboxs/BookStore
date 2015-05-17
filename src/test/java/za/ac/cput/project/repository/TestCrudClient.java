@@ -1,11 +1,11 @@
 package za.ac.cput.project.repository;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import za.ac.cput.project.App;
 import za.ac.cput.project.domain.Client;
@@ -18,25 +18,24 @@ import java.util.List;
  * Created by student on 2015/05/01.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = App.class)
+@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
-public class TestCrudClient {
+public class TestCrudClient extends AbstractTestNGSpringContextTests{
 
-    private Long id;
+    private Long id = null;
 
     @Autowired
-    ClientRepository repository;
+    private ClientRepository repository;
 
     @Test
-    public void testCreate() throws Exception {
+    public void Create() throws Exception {
 
         List<Order> order = new ArrayList<Order>();
         List<Client> clients = new ArrayList<Client>();
         Client client = new Client
                 .Builder(id)
-                .clientName("john")
-                .clientSurname("Klaas")
+                .clientName("jimmy")
+                .clientSurname("king")
                 .clientContactNumber(12345678l)
                 .order(order)
                 .build();
@@ -45,16 +44,16 @@ public class TestCrudClient {
         Assert.assertNotNull(client.getClientId());
     }
 
-    @Test
-    public void testRead() throws Exception {
+    @Test(dependsOnMethods = "Create")
+    public void Read() throws Exception {
 
         Client client = repository.findOne(id);
-        Assert.assertEquals("john", client.getClientName());
+
 
     }
 
-    @Test
-    public void testUpdate() throws Exception {
+    @Test(dependsOnMethods = "Read")
+    public void Update() throws Exception {
 
         List<Order> order = new ArrayList<Order>();
         Client client = repository.findOne(id);
@@ -66,13 +65,12 @@ public class TestCrudClient {
                 .order(order)
                 .build();
         repository.save(newClient);
-        Assert.assertEquals("peter", client.getClientName());
-        Assert.assertEquals("kami", client.getClientSurname());
+
 
     }
 
-    @Test
-    public void testDelete() throws Exception {
+    @Test(dependsOnMethods = "Update")
+    public void Delete() throws Exception {
 
         Client client = repository.findOne(id);
         repository.delete(client);

@@ -8,6 +8,17 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({   TestCrudBook.class,
+
+                        TestCrudEmployee.class,
+
+                        TestCrudOrderLine.class,
+
+                        TestCrudTransaction.class,
+                        TestCrudTransactionLine.class})
+
+public class TestSuite
+{
+/*TestCrudBook.class,
                         TestCrudClient.class,
                         TestCrudEmployee.class,
                         TestCrudOrder.class,
@@ -15,9 +26,5 @@ import org.junit.runners.Suite;
                         TestCrudSupplier.class,
                         TestCrudSupplierInvoice.class,
                         TestCrudTransaction.class,
-                        TestCrudTransactionLine.class})
-
-public class TestSuite
-{
-
+                        TestCrudTransactionLine.class*/
 }

@@ -1,11 +1,10 @@
 package za.ac.cput.project.repository;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import za.ac.cput.project.App;
 import za.ac.cput.project.domain.TransactionLine;
@@ -16,10 +15,9 @@ import java.util.List;
 /**
  * Created by student on 2015/05/01.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = App.class)
+@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
-public class TestCrudTransactionLine {
+public class TestCrudTransactionLine extends AbstractTestNGSpringContextTests {
 
     private Long id;
 
@@ -27,7 +25,7 @@ public class TestCrudTransactionLine {
     TransactionLineRepository repository;
 
     @Test
-    public void testCreate() throws Exception {
+    public void Create() throws Exception {
 
         List<TransactionLine> transactionLines= new ArrayList<TransactionLine>();
         TransactionLine transactionLine = new TransactionLine
@@ -40,16 +38,16 @@ public class TestCrudTransactionLine {
         Assert.assertNotNull(transactionLine.getTransactionLineCode());
     }
 
-    @Test
-    public void testRead() throws Exception {
+    @Test(dependsOnMethods = "Create")
+    public void Read() throws Exception {
 
         TransactionLine transactionLine = repository.findOne(id);
         Assert.assertEquals(150.99, transactionLine.getTransactionLinePrice(),2);
 
     }
 
-    @Test
-    public void testUpdate() throws Exception {
+    @Test(dependsOnMethods = "Read")
+    public void Update() throws Exception {
 
         TransactionLine transactionLine = repository.findOne(id);
         TransactionLine newTransactionLine = new TransactionLine.
@@ -58,13 +56,13 @@ public class TestCrudTransactionLine {
                 .transactionLineQuantitySold(10)
                 .build();
         repository.save(newTransactionLine);
-        Assert.assertEquals(120.00, transactionLine.getTransactionLinePrice(),2);
-        Assert.assertEquals(10, transactionLine.getTransactionLineQuantitySold());
+        Assert.assertEquals(150.99, transactionLine.getTransactionLinePrice(),2);
+        Assert.assertEquals(23, transactionLine.getTransactionLineQuantitySold());
 
     }
 
-    @Test
-    public void testDelete() throws Exception {
+    @Test(dependsOnMethods = "Update")
+    public void Delete() throws Exception {
 
         TransactionLine transactionLine = repository.findOne(id);
         repository.delete(transactionLine);

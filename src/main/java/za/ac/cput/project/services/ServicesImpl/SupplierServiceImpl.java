@@ -3,6 +3,7 @@ package za.ac.cput.project.services.ServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.project.domain.Supplier;
+import za.ac.cput.project.domain.SupplierInvoice;
 import za.ac.cput.project.repository.SupplierRepository;
 import za.ac.cput.project.services.SupplierService;
 
@@ -17,7 +18,7 @@ public class SupplierServiceImpl implements SupplierService{
 
     @Autowired
     SupplierRepository repository;
-    public List<Supplier> getBooks() {
+    public List<Supplier> getSupplier() {
         List<Supplier> allSuppliers = new ArrayList<Supplier>();
 
         Iterable<Supplier> suppliers = repository.findAll();
@@ -25,5 +26,10 @@ public class SupplierServiceImpl implements SupplierService{
             allSuppliers.add(supplier);
         }
         return allSuppliers;
+    }
+
+    @Override
+    public List<SupplierInvoice> getSupplierInvoice(Long id) {
+        return repository.findOne(id).getSupplierInvoice();
     }
 }

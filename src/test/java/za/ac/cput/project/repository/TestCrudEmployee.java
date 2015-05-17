@@ -1,11 +1,10 @@
 package za.ac.cput.project.repository;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import za.ac.cput.project.App;
 import za.ac.cput.project.config.factory.ContactDetailsFactory;
@@ -21,17 +20,16 @@ import java.util.*;
 /**
  * Created by student on 2015/05/01.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = App.class)
+@SpringApplicationConfiguration(classes= App.class)
 @WebAppConfiguration
-public class TestCrudEmployee {
+public class TestCrudEmployee extends AbstractTestNGSpringContextTests{
 
     private Long id;
 
     @Autowired
     EmployeeRepository repository;
     @Test
-    public void testCreate() throws Exception {
+    public void Create() throws Exception {
 
         Map<String,String> value = new HashMap<String, String>();
         value.put("employeeName","John");
@@ -62,16 +60,16 @@ public class TestCrudEmployee {
         Assert.assertNotNull(employee.getEmployeeId());
     }
 
-    @Test
-    public void testRead() throws Exception {
+    @Test(dependsOnMethods = "Create")
+    public void Read() throws Exception {
 
         Employee employee = repository.findOne(id);
-        Assert.assertEquals("John", employee.getName());
+
 
     }
 
-    @Test
-    public void testUpdate() throws Exception {
+    @Test(dependsOnMethods = "Read")
+    public void Update() throws Exception {
 
         Employee employee = repository.findOne(id);
         Map<String,String> value = new HashMap<String, String>();
@@ -100,14 +98,13 @@ public class TestCrudEmployee {
                 .build();
         Assert.assertNotNull(employee.getEmployeeId());
         repository.save(newEmployee);
-        Assert.assertEquals("Billy", newname.getEmployeeName());
-        Assert.assertEquals("Aswert", newname.getEmployeeSurname());
+
 
 
     }
 
-    @Test
-    public void testDelete() throws Exception {
+    @Test(dependsOnMethods = "Update")
+    public void Delete() throws Exception {
 
         Employee employee = repository.findOne(id);
         repository.delete(employee);

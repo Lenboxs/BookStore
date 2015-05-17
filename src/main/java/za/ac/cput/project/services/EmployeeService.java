@@ -1,6 +1,7 @@
 package za.ac.cput.project.services;
 
 import za.ac.cput.project.domain.Employee;
+import za.ac.cput.project.domain.Transaction;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface EmployeeService {
     List<Employee> getEmployees();
+    List<Transaction> getTransaction(Long id);
 }

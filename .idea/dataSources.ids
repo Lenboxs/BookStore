@@ -85,8 +85,8 @@
       <column name="transaction_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <column name="book_code" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="transaction_line_code"/>
-      <foreign-key name="FK_k70eox629iv1ljusly1ul4djv" columns="book_code" ref-table="book" ref-schema="" ref-catalog="bookstoreA" ref-columns="book_code" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="FK_k6tevrkl8w96d9gtx3qpvkk0f" columns="transaction_code" ref-table="transaction" ref-schema="" ref-catalog="bookstoreA" ref-columns="transaction_code" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_k70eox629iv1ljusly1ul4djv" columns="book_code" ref-table="book" ref-schema="" ref-catalog="bookstoreA" ref-columns="book_code" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="FK_k6tevrkl8w96d9gtx3qpvkk0f" unique="false" columns="transaction_code"/>
       <index name="FK_k70eox629iv1ljusly1ul4djv" unique="false" columns="book_code"/>
     </table>

@@ -1,5 +1,7 @@
 package za.ac.cput.project.repository;
 
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,11 @@ import java.util.List;
 /**
  * Created by student on 2015/05/01.
  */
-@SpringApplicationConfiguration(classes= App.class)
+@SpringApplicationConfiguration(classes = App.class)
 @WebAppConfiguration
 public class TestCrudBook extends AbstractTestNGSpringContextTests {
-    private Long id = null;
+    //private Long id = null;
+    private Long id;
 
     @Autowired
     private BookRepository repository;
@@ -46,7 +49,6 @@ public class TestCrudBook extends AbstractTestNGSpringContextTests {
         repository.save(book);
         id=book.getBookCode();
         Assert.assertNotNull(book.getBookCode());
-
 
     }
 

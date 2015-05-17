@@ -1,6 +1,7 @@
 package za.ac.cput.project.services;
 
 import za.ac.cput.project.domain.Client;
+import za.ac.cput.project.domain.Order;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface ClientService {
     List<Client> getClient();
+    List<Order> getOrder(Long id);
 }
